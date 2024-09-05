@@ -1,0 +1,32 @@
+---
+import 'video.js/dist/video-js.css';
+---
+
+<video
+id="my-video"
+class="video-js"
+controls
+preload="auto"
+width="640"
+height="264"
+data-setup="{}"
+>
+<source src="MY_VIDEO_SOURCE.mp4" type="video/mp4" />
+
+To view this video please enable JavaScript, and consider upgrading to a
+web browser that
+<a href="https://videojs.com/html5-video-support/" target="_blank"
+>supports HTML5 video</a
+>
+
+</video>
+
+<script>
+import videojs from 'video.js';
+
+const player = videojs('my-video');
+  return () => {
+  // This is important to do when your component unmounts
+  player.dispose();
+};
+</script>

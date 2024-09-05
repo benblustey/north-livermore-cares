@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import VideoPlayer from '../components/VideoPlayer.astro';
+import ColumnChart from '../components/ColumnChart.astro';
+import CardGroup from '../components/CardGroup.astro';
+---
+
+<Layout title="North Livermore Cares">
+	<h1>Livermore <span class="text-gradient">Fireworks</span></h1>
+	<p class="intro-text">
+		Our neighborhood has taken advantage of the lack of basic enforcement. This sets the precident of ruleless behavior without any concern or compassion for their fellow neighbors.
+	</p>
+	<main>
+		<CardGroup />
+		<VideoPlayer />
+		<ColumnChart />
+		<h2 class="text-center">Related Articles</h2>
+		<ul role="list" class="link-card-grid">
+			<Card
+				href="https://fox40.com/news/local-news/more-citations-coming-in-northern-california-after-drone-reveals-illegal-fireworks-use/amp/"
+				title="Increased Fines Combat Fireworks"
+				body="Learn how Sacramento Fire Department is using undercover officials working to secretly capture video and cite people for setting off illegal fireworks."
+			/>
+			<Card
+				href="https://astro.build/integrations/"
+				title="Success with Tracy Ca"
+				body="Supercharge your project with new frameworks and libraries."
+			/>
+		</ul>
+
+	</main>
+</Layout>
+

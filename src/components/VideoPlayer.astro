@@ -1,32 +1,91 @@
 ---
-import 'video.js/dist/video-js.css';
+import VideoPlaylist from './VideoPlaylist.astro';
+
+
+interface VideoItem {
+  title: string,
+  length: string,
+  thumbnail: string,
+  src: string
+}
+
+interface Props {
+  playlist: Array<VideoItem>
+}
+
+const { playlist } = Astro.props;
+
+
+const items = [
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00.35', thumbnail: 'thumbnail.jpg' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00.35', thumbnail: '00.35' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00.35', thumbnail: '00.35' }
+];
+
 ---
 
-<video
-id="my-video"
-class="video-js"
-controls
-preload="auto"
-width="640"
-height="264"
-data-setup="{}"
->
-<source src="MY_VIDEO_SOURCE.mp4" type="video/mp4" />
-
-To view this video please enable JavaScript, and consider upgrading to a
-web browser that
-<a href="https://videojs.com/html5-video-support/" target="_blank"
->supports HTML5 video</a
->
-
-</video>
+<div class="video-wrapper">
+  <video 
+    id="video-player"
+    poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
+    src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
+    controls>
+    Your browser does not support the video tag.
+  </video>
+  <VideoPlaylist content={playlist} />
+</div>
 
 <script>
-import videojs from 'video.js';
+// Array of video sources
+const videoPlayer = document.getElementById('video-player') as HTMLMediaElement;
+const playlistElement = document.getElementById('playlist') as HTMLElement;
+let currentVideoIndex = 0;
 
-const player = videojs('my-video');
-  return () => {
-  // This is important to do when your component unmounts
-  player.dispose();
-};
+// Initialize the playlist UI
+// function initPlaylist() {
+//     playlist.forEach((video, index) => {
+//         const li = document.createElement('li');
+//         li.innerHTML = `<div>
+//             ${video.title}
+//             ${video.thumbnail}
+//             ${video.length}
+//           </div>`;
+//         // li.dataset.index = index;
+
+//         li.addEventListener('click', () => {
+//             currentVideoIndex = index;
+//             loadVideo(currentVideoIndex);
+//             highlightActiveVideo();
+//             videoPlayer.play();
+//         });
+
+//         playlistElement.appendChild(li);
+//     });
+
+//     loadVideo(currentVideoIndex);
+//     highlightActiveVideo();
+// }
+
+// Load video based on index
+function loadVideo(index) {
+    videoPlayer.src = playlist[index].src;
+}
+
+// Highlight the active video in the playlist
+function highlightActiveVideo() {
+    const items = playlistElement.querySelectorAll('li');
+    items.forEach(item => item.classList.remove('active'));
+    items[currentVideoIndex].classList.add('active');
+}
+
+// Event listener for ending the video
+videoPlayer.addEventListener('ended', () => {
+    currentVideoIndex = (currentVideoIndex + 1) % playlist.length; // Loop back to start
+    loadVideo(currentVideoIndex);
+    highlightActiveVideo();
+    videoPlayer.play();
+});
+
+// Initialize the playlist
+// initPlaylist();
 </script>

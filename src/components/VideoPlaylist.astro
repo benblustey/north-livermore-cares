@@ -1,0 +1,29 @@
+---
+
+interface VideoItem {
+  src: string,
+  title: string,
+  length: string,
+  thumbnail?: string
+}
+
+const { content } = Astro.props;
+
+---
+
+<div id="playlist">
+  <div class="playlist-wrapper">
+    {
+      content.map((data:VideoItem) => 
+        <div class="video-card" data-video-src={data.src}>
+          <div class="thumbnail">
+            <img src={data.thumbnail} alt="" />
+          </div>
+          <div class="video-details">
+            <span>{data.title}</span>
+            <span>{data.length}</span>
+          </div>
+        </div>)
+    }
+  </div>
+</div>

@@ -17,8 +17,8 @@
     "astro": "^4.11.5",
     "postcss": "^8.4.45",
     "typescript": "^5.5.3",
-    "video.js": "^8.16.1",
-    "videojs-playlist": "^5.1.2"
+    "videojs-playlist": "^5.1.0",
+    "videojs-playlist-ui": "5.0.0"
   },
   "devDependencies": {
     "@types/eslint": "^8.21.1",
@@ -33,6 +33,7 @@
     "eslint-plugin-astro": "^0.23.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-tsdoc": "^0.2.17"
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "video.js": "^8.17.3"
   }
 }

@@ -1,21 +1,70 @@
 ---
-import '../styles/global.css';
 
+import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import VideoPlayer from '../components/VideoPlayer.astro';
-import ColumnChart from '../components/ColumnChart.astro';
+import ColumnChart from '../components/DataCharts.astro';
 import CardGroup from '../components/CardGroup.astro';
+
+
+const playlist = [
+		{ src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' }
+];
+
+const population = 5650;
+const vetrans = Math.round(population * 0.046);
+const daysTotal = 32;
+const eventsTotal = 210;
+const content = [
+	{
+    data: `~${population}`,
+    title: "Neighbors",
+    desc: "This data reflects just the Old Town neighborhood.*",
+    footnote: `* Estimated population aquired using <a href="https://www.maps.ie/population/">maps.ie</a>`
+  },
+  {
+    data: `${vetrans}`,
+    title: "Veterans",
+    desc: "Based on census data of 4.6% of residents. Half of these veterans are from Vietnam, Gulf, Afganistan, and Iraq wars.†",
+    footnote: `† Census Reporter data from 2022 <a href="https://censusreporter.org/profiles/16000US0641992-livermore-ca/">Source</a>`
+  },
+  {
+    data: `${daysTotal}`,
+    title: "Days of Fireworks",
+    desc: `There have been a total of ${daysTotal} days since June 25, 2024 with fireworks launched.`
+  },
+  {
+    data: `${eventsTotal}`,
+    title: "Total Events",
+    desc: "Events are recordings of fireworks detected, not individual fireworks. Meaning, there are much more being detnated."
+  }
+]
+
 ---
 
 <Layout title="North Livermore Cares">
 	<h1>Livermore <span class="text-gradient">Fireworks</span></h1>
-	<p class="intro-text">
-		Our neighborhood has taken advantage of the lack of basic enforcement. This sets the precident of ruleless behavior without any concern or compassion for their fellow neighbors.
-	</p>
+	<div class="intro-text">
+		<p>Our neighborhood has taken advantage of the lack of basic enforcement.</p>
+		<p>Unregulated parties and loud music sets the precident of ruleless behavior without any concern or compassion for their fellow neighbors.</p>
+	</div>
 	<main>
-		<CardGroup />
-		<VideoPlayer />
+		<CardGroup  content={content} />
+		<VideoPlayer 
+			playlist={playlist}
+		/>
 		<ColumnChart />
 		<h2 class="text-center">Related Articles</h2>
 		<ul role="list" class="link-card-grid">
@@ -32,5 +81,8 @@ import CardGroup from '../components/CardGroup.astro';
 		</ul>
 
 	</main>
+	<footer>
+		<p>Footer</p>
+	</footer>
 </Layout>
 

@@ -1,37 +1,18 @@
 ---
-const population = 5650;
-const vetrans = Math.round(population * 0.046);
-const daysTotal = 32;
-const eventsTotal = 210;
+interface CardContent {
+  data: string,
+  title: string,
+  desc: string,
+  footnote?: string
+}
 
-const content = [
-  {
-    data: `~${population}`,
-    title: "Neighbors",
-    desc: "This data reflects just the Old Town neighborhood.*"
-  },
-  {
-    data: `${vetrans}`,
-    title: "Veterans",
-    desc: "Based on census data of 4.6% of residents. Half of these veterans are from Vietnam, Gulf, Afganistan, and Iraq wars.†"
-  },
-  {
-    data: `${daysTotal}`,
-    title: "Days of Fireworks",
-    desc: `There have been a total of ${daysTotal} days since June 25, 2024 with fireworks launched.`
-  },
-  {
-    data: `${eventsTotal}`,
-    title: "Total Events",
-    desc: "Events are recordings of fireworks detected, not individual fireworks. Meaning, there are much more being detnated."
-  }
-]
+const { content } = Astro.props;
 ---
 
 <div class="card-group">
   <div class="card-group-wrapper">
     {
-      content.map((data) => 
+      content.map((data:CardContent) => 
         <div class="card">
           <p class="card-data">{data.data}</p>
           <p class="card-title">{data.title}</p>
@@ -40,7 +21,11 @@ const content = [
     }
   </div>
   <div class="foot-note text-center">
-    <p>* Estimated population aquired using <a href="https://www.maps.ie/population/">maps.ie</a></p>
-    <p>† Census Reporter data from 2022 <a href="https://censusreporter.org/profiles/16000US0641992-livermore-ca/">Source</a></p>
+    <h4>Footnotes</h4>
+    {
+      content.map((data:CardContent) => 
+        <p set:html={data.footnote} />
+      )
+    }
   </div>
 </div>

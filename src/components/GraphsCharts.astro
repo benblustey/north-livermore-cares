@@ -1,3 +1,13 @@
+---
+
+
+---
+
+<h2 class="text-center">Events By Date</h2>
+<div id="events-by-date" class="graph-wrapper"></div>
+<h2 class="text-center">Events By Hour</h2>
+<div id="events-by-hour" class="graph-wrapper"></div>
+<script>
 import ApexCharts from 'apexcharts'
 
 function generateData(){
@@ -352,3 +362,4 @@ if (document.getElementById('events-by-date')) {
   var chart = new ApexCharts(document.querySelector("#events-by-date"), options);
   chart.render();
 }
+</script>

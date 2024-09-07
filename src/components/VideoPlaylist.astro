@@ -4,14 +4,15 @@ interface VideoItem {
   src: string,
   title: string,
   length: string,
-  thumbnail?: string
+  thumbnail?: string,
+  starred?: boolean
 }
 
 const { content } = Astro.props;
 
 ---
 
-<div id="playlist">
+<div id="playlist" class="">
   <div class="playlist-wrapper">
     {
       content.map((data:VideoItem) => 

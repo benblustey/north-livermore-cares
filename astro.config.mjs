@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
+import icon from "astro-icon";
+
  const DEV_PORT = 4321;
 // https://astro.build/config
 export default defineConfig({
@@ -10,8 +12,7 @@ export default defineConfig({
   base: process.env.CI ? '/' : undefined,
 
 	integrations: [
-		//
 		sitemap(),
-		// tailwind(),
+		icon(),
 	],
 });

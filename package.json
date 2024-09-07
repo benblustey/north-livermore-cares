@@ -15,25 +15,11 @@
     "@faker-js/faker": "^7.6.0",
     "apexcharts": "^3.53.0",
     "astro": "^4.11.5",
-    "postcss": "^8.4.45",
-    "typescript": "^5.5.3",
-    "videojs-playlist": "^5.1.0",
-    "videojs-playlist-ui": "5.0.0"
+    "simple-datatables": "^9.1.0",
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
-    "@types/eslint": "^8.21.1",
-    "@typescript-eslint/eslint-plugin": "^5.54.1",
-    "@typescript-eslint/parser": "^5.54.1",
-    "astro-eslint-parser": "^0.11.0",
-    "eslint": "^8.35.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.7.0",
-    "eslint-import-resolver-typescript": "^3.5.3",
-    "eslint-plugin-astro": "^0.23.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-tsdoc": "^0.2.17",
-    "video.js": "^8.17.3"
+    "@iconify-json/mdi": "^1.2.0",
+    "astro-icon": "^1.1.1"
   }
 }

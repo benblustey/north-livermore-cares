@@ -60,7 +60,7 @@ if (document.getElementById('events-by-hour')) {
 			},
 		},
     tooltip: {
-      custom: function({series, seriesIndex, dataPointIndex, w}) {
+      custom: function({series, seriesIndex, dataPointIndex, w}:{[key:string]:any}) {
         var label = w.globals.initialSeries[seriesIndex];
         var data = label.data[dataPointIndex];
         var value = series[seriesIndex][dataPointIndex];
@@ -273,12 +273,17 @@ if (document.getElementById('events-by-date')) {
       }
     },
     tooltip: {
-      custom: function({series, seriesIndex, dataPointIndex, w}) {
+      custom: function({series, seriesIndex, dataPointIndex, w}:{[key:string]:any}) {
         var label = w.globals.initialSeries[seriesIndex];
         var shortLabel = label.name.substring(0,3)
         var data = label.data[dataPointIndex];
         var value = series[seriesIndex][dataPointIndex] >= 0 ? series[seriesIndex][dataPointIndex] : "n/r"
-        return `<div class="arrow_box"><span class="tooltip-title">${shortLabel} ${data.x}:</span></br><span class="tooltip-value">${value} events</div>`
+        return (
+          `<div class="arrow_box">
+            <span class="tooltip-title">${shortLabel} ${data.x}:</span></br>
+            <span class="tooltip-value">${value} events
+          </div>`
+        )
       }
     },
     colors: ["#E03131"],

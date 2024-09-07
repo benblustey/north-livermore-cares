@@ -1,0 +1,91 @@
+---
+
+interface TableItem {
+  src: string,
+  date?: string,
+  time: string,
+  title?: string,
+  length: string,
+  thumbnail?: string,
+  starred?: boolean
+}
+
+function randomDate(start:any, end:any) {
+  var date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  return date;
+}
+
+function generateData(){
+  let arr = []
+  for(let i=1; i<210; ++i){
+    var date = randomDate(new Date(2012, 0, 1), new Date());
+    var time = date.toTimeString().split(' ')[0];
+    arr.push(
+      {
+        src: 'http://vjs.zencdn.net/v/oceans.mp4',
+        date: date.toDateString(),
+        time: time,
+        length: Math.floor((Math.random() * 55))
+      }
+    )
+  }
+  return arr
+}
+
+const columns = [
+  { id: 'date', label: 'Date' },
+  { id: 'time', label: 'Time' },
+  { id: 'length', label: 'Length' },
+  { id: 'starred', label: 'Starred' },
+  { id: 'link', label: 'Link' },
+]
+
+const recEvents = generateData();
+// // uncomment this after intializing the DB query
+// const { recEvents } = Astro.props;
+
+---
+
+<div class="data-table">
+  <table id="data-table">
+    <colgropup>
+      <col style="width:auto;"/>
+      <col style="width:auto;"/>
+      <col style="width:auto; text-align: center;"/>
+      <col style="width: 75px; text-align: center;"/>
+      <col style="width: 75px;"/>
+    </colgropup>
+    <thead>
+      <tr>
+        {
+          columns.map((column) => 
+            <th scope="col">{column.label}</th>
+          )
+        }
+      </tr>
+    </thead>
+    <tbody>
+      {
+        recEvents.map((eventValue) =>
+          <tr>
+            <td>{eventValue.date}</td>
+            <td>{eventValue.time}</td>
+            <td>{eventValue.length}</td>
+            <td class="star">&#x2726;</td>
+            <td>
+              <button class="play-btn">&#x27A4;</button>
+            </td>
+          </tr>
+        )
+      }
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+  </table>
+</div>
+
+<script>
+  import { DataTable } from 'simple-datatables';
+  const dataTable = new DataTable("#data-table");
+</script>

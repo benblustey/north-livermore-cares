@@ -1,6 +1,6 @@
 ---
 import VideoPlaylist from './VideoPlaylist.astro';
-
+import TableList from './TableList.astro';
 
 interface VideoItem {
   title: string,
@@ -14,7 +14,6 @@ interface Props {
 }
 
 const { playlist } = Astro.props;
-
 
 const items = [
     { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00.35', thumbnail: 'thumbnail.jpg' },
@@ -33,59 +32,48 @@ const items = [
     Your browser does not support the video tag.
   </video>
   <VideoPlaylist content={playlist} />
+  <TableList />
 </div>
 
 <script>
 // Array of video sources
 const videoPlayer = document.getElementById('video-player') as HTMLMediaElement;
 const playlistElement = document.getElementById('playlist') as HTMLElement;
+const videoCards = playlistElement.getElementsByClassName('video-card');
 let currentVideoIndex = 0;
 
 // Initialize the playlist UI
-// function initPlaylist() {
-//     playlist.forEach((video, index) => {
-//         const li = document.createElement('li');
-//         li.innerHTML = `<div>
-//             ${video.title}
-//             ${video.thumbnail}
-//             ${video.length}
-//           </div>`;
-//         // li.dataset.index = index;
-
-//         li.addEventListener('click', () => {
-//             currentVideoIndex = index;
-//             loadVideo(currentVideoIndex);
-//             highlightActiveVideo();
-//             videoPlayer.play();
-//         });
-
-//         playlistElement.appendChild(li);
-//     });
-
-//     loadVideo(currentVideoIndex);
-//     highlightActiveVideo();
-// }
-
-// Load video based on index
-function loadVideo(index) {
-    videoPlayer.src = playlist[index].src;
+function initPlaylist() {
+  for (let videoCard of videoCards) {
+    let videoSrc = videoCard.getAttribute('data-video-src');
+    videoCard.addEventListener('click', () => {
+      loadVideo(videoSrc as string);
+      highlightActiveVideo();
+      videoPlayer.play();
+    });
+  }
 }
 
-// Highlight the active video in the playlist
+// Load video based on index
+function loadVideo(videoSrc: string) {
+  videoPlayer.src = videoSrc;
+}
+
+// // Highlight the active video in the playlist
 function highlightActiveVideo() {
-    const items = playlistElement.querySelectorAll('li');
-    items.forEach(item => item.classList.remove('active'));
-    items[currentVideoIndex].classList.add('active');
+  const items = playlistElement.querySelectorAll('li');
+  items.forEach(item => item.classList.remove('active'));
+  items[currentVideoIndex].classList.add('active');
 }
 
 // Event listener for ending the video
-videoPlayer.addEventListener('ended', () => {
-    currentVideoIndex = (currentVideoIndex + 1) % playlist.length; // Loop back to start
-    loadVideo(currentVideoIndex);
-    highlightActiveVideo();
-    videoPlayer.play();
-});
+// videoPlayer.addEventListener('ended', () => {
+//     currentVideoIndex = (currentVideoIndex + 1) % playlist.length; // Loop back to start
+//     loadVideo(currentVideoIndex);
+//     highlightActiveVideo();
+//     videoPlayer.play();
+// });
 
 // Initialize the playlist
-// initPlaylist();
+initPlaylist();
 </script>

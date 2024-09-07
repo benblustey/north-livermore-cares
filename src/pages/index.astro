@@ -7,9 +7,8 @@ import VideoPlayer from '../components/VideoPlayer.astro';
 import ColumnChart from '../components/DataCharts.astro';
 import CardGroup from '../components/CardGroup.astro';
 
-
-const playlist = [
-		{ src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
+const recEvents = [
+		{ src: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
     { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
     { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
     { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
@@ -31,19 +30,19 @@ const content = [
 	{
     data: `~${population}`,
     title: "Neighbors",
-    desc: "This data reflects just the Old Town neighborhood.*",
+    desc: "This data only reflects the Old Town neighborhood and not the entire city of Livermore.* If data was aquired city wide, the numbers would be much higher.",
     footnote: `* Estimated population aquired using <a href="https://www.maps.ie/population/">maps.ie</a>`
   },
   {
     data: `${vetrans}`,
     title: "Veterans",
-    desc: "Based on census data of 4.6% of residents. Half of these veterans are from Vietnam, Gulf, Afganistan, and Iraq wars.†",
+    desc: "Based on census data of 4.6% of residents. Higher percentage than anywhere in the Bay Area. Half of these veterans are from Vietnam, Gulf, Afganistan, and Iraq wars.†",
     footnote: `† Census Reporter data from 2022 <a href="https://censusreporter.org/profiles/16000US0641992-livermore-ca/">Source</a>`
   },
   {
     data: `${daysTotal}`,
     title: "Days of Fireworks",
-    desc: `There have been a total of ${daysTotal} days since June 25, 2024 with fireworks launched.`
+    desc: `There have been a total of ${daysTotal} days since June 25, 2024 with fireworks detnated. AI sound analysation was set for Explosions, due to the mortars not triggering fireworkd sound models.`
   },
   {
     data: `${eventsTotal}`,
@@ -61,9 +60,8 @@ const content = [
 		<p>Unregulated parties and loud music sets the precident of ruleless behavior without any concern or compassion for their fellow neighbors.</p>
 	</div>
 	<main>
-		<CardGroup  content={content} />
-		<VideoPlayer 
-			playlist={playlist}
+		<CardGroup content={content} />
+		<VideoPlayer playlist={recEvents}
 		/>
 		<ColumnChart />
 		<h2 class="text-center">Related Articles</h2>
@@ -72,6 +70,21 @@ const content = [
 				href="https://fox40.com/news/local-news/more-citations-coming-in-northern-california-after-drone-reveals-illegal-fireworks-use/amp/"
 				title="Increased Fines Combat Fireworks"
 				body="Learn how Sacramento Fire Department is using undercover officials working to secretly capture video and cite people for setting off illegal fireworks."
+			/>
+			<Card
+				href="https://astro.build/integrations/"
+				title="Success with Tracy Ca"
+				body="Supercharge your project with new frameworks and libraries."
+			/>
+			<Card
+				href="https://fox40.com/news/local-news/more-citations-coming-in-northern-california-after-drone-reveals-illegal-fireworks-use/amp/"
+				title="Increased Fines Combat Fireworks"
+				body="Learn how Sacramento Fire Department is using undercover officials working to secretly capture video and cite people for setting off illegal fireworks."
+			/>
+			<Card
+				href="https://astro.build/integrations/"
+				title="Success with Tracy Ca"
+				body="Supercharge your project with new frameworks and libraries."
 			/>
 			<Card
 				href="https://astro.build/integrations/"

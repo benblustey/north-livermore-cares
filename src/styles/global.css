@@ -39,6 +39,7 @@
   --container-spacing-xs: calc(0.625rem * 1);
 
   --font-size-sm: clamp(12px,calc(4.25rem + ((1vw - 7.68px) * 12.5)), 14px);
+  --font-size-md: clamp(18px,calc(4.25rem + ((1vw - 7.68px) * 12.5)), 24px);
   --font-size-xl: clamp(68px,calc(4.25rem + ((1vw - 7.68px) * 12.5)), 120px);
   --font-size-xxl: clamp(68px,calc(4.25rem + ((1vw - 7.68px) * 12.5)), 120px);
 }
@@ -114,7 +115,7 @@ p {
 .intro-text {
   color: rgb(var(--accent-light));
   text-align: center;
-  font-size: 18px;
+  font-size: var(--font-size-md);
   max-width: calc(40rem * var(--page-scale));
   margin-inline: auto;
   margin-bottom: var(--container-margin-xl);

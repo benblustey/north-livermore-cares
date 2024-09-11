@@ -7,7 +7,6 @@ import ColumnChart from '../components/GraphsCharts.astro';
 import CardGroup from '../components/CardGroup.astro';
 
 import { eventTotals } from '../data/event-data.json';
-import EventsComponent from '../components/EventsComponent';
 
 const recEvents = [
 		{ src: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
@@ -56,7 +55,6 @@ const content = [
 ---
 
 <Layout title="North Livermore Cares">
-	<EventsComponent client:load/>
 	<h1>Livermore <span class="text-gradient">Fireworks</span></h1>
 	<div class="intro-text">
 		<p>Our neighborhood has taken advantage of the lack of basic enforcement.</p>

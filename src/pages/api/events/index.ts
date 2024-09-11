@@ -1,11 +1,5 @@
 import type { APIRoute } from "astro";
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: 'http://localhost:8080',
-  timeout: 100000,
-  // headers: {'X-Custom-Header': 'foobar'}
-});
+import { instance } from "../axisconfig";
 
 export async function GET() {
 	const allEvents = await instance.get('/api/event/all');
@@ -29,9 +23,3 @@ export const POST: APIRoute = async ({request}) => {
 	})
 }
 
-// export const POST: APIRoute = ({ request }) => {
-//   return new Response(JSON.stringify({
-//       message: "This was a POST!"
-//     })
-//   )
-// }

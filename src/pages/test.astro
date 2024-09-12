@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import type EventData from '../types/event.type';
+import type { APIRoute } from 'astro';
+
+const res = await fetch('http://localhost:4321/api/events');
+const dataEvents: EventData[] = await res.json();
+
+import dataEventsStatic from "../../public/event-data.json";
+import APICard from '../components/APICard';
+---
+
+<Layout title="North Livermore Cares">
+	<main>
+		<h1>Test Page</h1>
+		<ul>
+			{dataEvents.map((i) => <li>{i.friendlyDate}:{i.src}</li>)}
+		</ul>
+		<ul>
+			{dataEventsStatic.events.map((i) => <li>{i.friendlyDate}:{i.src}</li>)}
+		</ul>
+		<ul>
+			<li>
+				<APICard />
+			</li>
+		</ul>
+	</main>
+	<footer>
+		<p>Footer</p>
+	</footer>
+</Layout>
+

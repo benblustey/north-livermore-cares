@@ -1,15 +1,5 @@
 ---
 
-interface TableItem {
-  src: string,
-  date?: string,
-  time: string,
-  title?: string,
-  length: string,
-  thumbnail?: string,
-  starred?: boolean
-}
-
 function randomDate(start:any, end:any) {
   var date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
   return date;
@@ -42,7 +32,16 @@ const columns = [
 
 const recEvents = generateData();
 // // uncomment this after intializing the DB query
-// const { recEvents } = Astro.props;
+// interface TableItem {
+//   src: string,
+//   date?: string,
+//   time: string,
+//   title?: string,
+//   length: string,
+//   thumbnail?: string,
+//   starred?: boolean
+// }
+// const { recEvents: TableItem } = Astro.props;
 
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@9.1.0/dist/style.min.css">

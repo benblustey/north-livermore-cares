@@ -23,9 +23,11 @@ const { content } = Astro.props;
   <div class="foot-note text-center">
     <h4>Footnotes</h4>
     {
-      content.map((data:CardContent) => 
-        <p set:html={data.footnote} />
-      )
+      content.map((data:CardContent) => {
+				if (data.footnote?.length) {
+					return <p set:html={data.footnote} />
+				}
+			})
     }
   </div>
 </div>

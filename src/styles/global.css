@@ -277,6 +277,7 @@ video {
   }
 }
 .data-table div.datatable-wrapper {
+	overflow-y: scroll;
   div.datatable-top {
     div.datatable-dropdown label {
       font-size: 16px;

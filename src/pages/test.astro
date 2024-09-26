@@ -2,29 +2,48 @@
 import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
 import type EventData from '../types/event.type';
-import type { APIRoute } from 'astro';
 
-const res = await fetch('http://localhost:4321/api/events');
+const res = await fetch('http://localhost:4322/api/events/all');
 const dataEvents: EventData[] = await res.json();
 
-import dataEventsStatic from "../../public/event-data.json";
-import APICard from '../components/APICard';
+const hoursInDay = Array(24).fill(0);
+// Grab all the hours when events occured
+function eventsHour (dataEvents: EventData[]) {
+	dataEvents.forEach((event) => {
+		const hour = event.friendlyDate.slice(10,12);
+		if (hour && hour[0]) {
+			let returnedIndex = parseInt(hour);
+			hoursInDay[returnedIndex] = (hoursInDay[returnedIndex] || 0) + 1;
+		}
+	});
+}
+eventsHour(dataEvents);
+console.log(hoursInDay);
+
+// import dataEventsStatic from "../../public/event-data.json";
+// import APICard from '../components/APICard';
 ---
 
 <Layout title="North Livermore Cares">
 	<main>
 		<h1>Test Page</h1>
-		<ul>
-			{dataEvents.map((i) => <li>{i.friendlyDate}:{i.src}</li>)}
+		<div>
+			{
+				dataEvents.map((i) => 
+					<ul>
+						<li>{i.friendlyDate}</li>
+						<li>{i.src}</li>
+						<li>{i.length}</li>
+						<li>{i.starred}</li>
+					</ul>
+				)
+			}
 		</ul>
-		<ul>
-			{dataEventsStatic.events.map((i) => <li>{i.friendlyDate}:{i.src}</li>)}
-		</ul>
-		<ul>
+		<!-- <ul>
 			<li>
 				<APICard />
 			</li>
-		</ul>
+		</ul> -->
 	</main>
 	<footer>
 		<p>Footer</p>

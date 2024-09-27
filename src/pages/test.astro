@@ -1,13 +1,23 @@
 ---
 import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
+import ColumnChart from '../components/GraphsCharts.astro';
+
+
 import type EventData from '../types/event.type';
 
 const res = await fetch('http://localhost:4322/api/events/all');
 const dataEvents: EventData[] = await res.json();
 
-const hoursInDay = Array(24).fill(0);
 // Grab all the hours when events occured
+// This data is used for the bargraph
+const hoursInDay = Array(24).fill(0);
+// create object array for monthly data
+const monthArray = Array.from({ length: 12 }, () => ({
+  eventTotal: 0,
+  events: [],
+}));
+
 function eventsHour (dataEvents: EventData[]) {
 	dataEvents.forEach((event) => {
 		const hour = event.friendlyDate.slice(10,12);
@@ -18,15 +28,30 @@ function eventsHour (dataEvents: EventData[]) {
 	});
 }
 eventsHour(dataEvents);
-console.log(hoursInDay);
+
+
+dataEvents.forEach((event) => {
+	const month = event.friendlyDate.slice(3,5);
+	if (month && month[0]) {
+		const monthIndex = parseInt(month);
+		let monthltTotal = (monthArray[monthIndex].eventTotal || 0);
+		monthArray[monthIndex].eventTotal = monthltTotal + 1;
+		monthArray[monthIndex].events.push(event.friendlyDate);
+	}
+})
+console.log(monthArray)
+
+// sort the events for calendar heatmap
+// console.log('sorted: ' + monthArray[6].events.sort());
 
 // import dataEventsStatic from "../../public/event-data.json";
 // import APICard from '../components/APICard';
+
 ---
 
 <Layout title="North Livermore Cares">
 	<main>
-		<h1>Test Page</h1>
+		<ColumnChart eventsByHour={hoursInDay}/>
 		<div>
 			{
 				dataEvents.map((i) => 

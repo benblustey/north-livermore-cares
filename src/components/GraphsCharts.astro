@@ -1,12 +1,22 @@
 ---
-
-
+const { eventsByHour } = Astro.props;
 ---
 
-<h2 class="text-center">Events By Date</h2>
-<div id="events-by-date" class="graph-wrapper"></div>
 <h2 class="text-center">Events By Hour</h2>
 <div id="events-by-hour" class="graph-wrapper"></div>
+
+<div class="eventsByHour">
+	<ul>
+		{
+			eventsByHour.map((event: unknown) => 
+				<li>{event}</li>
+			)
+		}
+	</ul>
+</div>
+
+
+
 <script>
 import ApexCharts from 'apexcharts'
 

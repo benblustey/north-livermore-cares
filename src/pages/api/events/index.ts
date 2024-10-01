@@ -1,4 +1,3 @@
-import type { APIRoute } from "astro";
 import { instance } from "../axisconfig";
 
 export async function GET() {
@@ -11,15 +10,3 @@ export async function GET() {
 		}
 	)
 }
-
-export const POST: APIRoute = async ({request}) => {
-	const event = await request.json();
-	const createEvent = await instance.post('/api/event/add', event);
-	return new Response(JSON.stringify(createEvent.data), {
-		status: 200,
-		headers: {
-			"Content-Type": "application/json"
-		}
-	})
-}
-

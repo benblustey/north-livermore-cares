@@ -1,20 +1,10 @@
 ---
-const { eventsByHour } = Astro.props;
+const { eventsByHour, eventsByDay } = Astro.props;
 ---
 
 <h2 class="text-center">Events By Hour</h2>
 <div id="events-by-hour" class="graph-wrapper"></div>
-
-<div class="eventsByHour">
-	<ul>
-		{
-			eventsByHour.map((event: unknown) => 
-				<li>{event}</li>
-			)
-		}
-	</ul>
-</div>
-
+<div id="events-by-date" class="graph-wrapper"></div>
 
 
 <script>

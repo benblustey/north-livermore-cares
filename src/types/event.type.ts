@@ -1,8 +1,9 @@
 export default interface EventData {
-	src: String,
-	epoch: String,
-	date: String,
-	friendlyDate: String,
-	length: Number,
-	starred: Boolean
+	_id: number,
+	src: string,
+	epoch: number,
+	date: string,
+	friendlyDate: string,
+	length: number,
+	starred: boolean
 }

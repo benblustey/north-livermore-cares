@@ -1,17 +1,20 @@
 ---
 import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
-import ColumnChart from '../components/GraphsCharts.astro';
-import AllEvents from '../components/AllEvents';
-import EventData from '../components/EventData';
+// import EventData from '../components/EventData';
+// import MyComponent from '../components/TestChart'
+// import ColumnChart from '../components/GraphsCharts.astro';
+
+import ChartComponent from '../components/ChartComponent'
 ---
 
 <Layout title="North Livermore Cares">
 	<main>
-		<EventData client:only="react"/>
-		<AllEvents client:only="react"/>
+		<!-- <MyComponent client:only="react"/> -->
+		<ChartComponent client:only="react"/>
 		<!-- <ColumnChart /> -->
-		<!--HeatMapCalendar-->
+		<!-- <EventData client:only="react"/> -->
+		<!-- <AllEvents client:only="react"/> -->
 	</main>
 	<footer>
 		<p>Footer</p>

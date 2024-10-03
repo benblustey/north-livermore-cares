@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type EventData from "../types/event.type";
+import ChartComponent from "./ChartComponent";
 
 interface MonthlyData {
 	eventTotal: number
@@ -12,30 +12,30 @@ interface ChartData {
 }
 
 const AllEvents = () => {
-  const [events, setEvents] = useState<any[]>([]);
+  const [eventsData, setEvents] = useState<ChartData>([]);
   useEffect(() => {
     const getEvents = async () => {
       const res = await fetch("/api/getEventData.json");
-      const data = await res.json();
-      setEvents(data);
+      const eventsData = await res.json();
+
+      eventsData.monthArray = eventsData.monthArray.filter((item: { eventTotal: number; }) => item.eventTotal !== 0 );
+
+			setEvents(eventsData);
     };
 
     getEvents();
   }, []);
-
+	
   return (
-    <div>::::
-      {events.length > 0 &&
-        events.map(( item:EventData ) => (
-          <ul>
-            <li>{item._id}</li>
-            <li>{item.epoch}</li>
-            <li>{item.src}</li>
-            <li>{item.starred}</li>
-            <li>{item.friendlyDate}</li>
-            <li>{item.length}</li>
-					</ul>
-        ))}
+    <div>
+			<h2>Time Chart</h2>
+			<ChartComponent />
+			{/* <HeatMapComponent /> */}
+      {/* {eventsData.map(( item:MonthlyData ) => (
+				<ul>
+					<li>{item.eventTotal}</li>
+				</ul>
+			))} */}
     </div>
   );
 };

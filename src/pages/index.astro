@@ -3,10 +3,13 @@ import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import VideoPlayer from '../components/VideoPlayer.astro';
-import ColumnChart from '../components/GraphsCharts.astro';
+// import ColumnChart from '../components/GraphsCharts.astro';
+// import AllEvents from '../components/AllEvents';
 import CardGroup from '../components/CardGroup.astro';
 
 import { eventTotals } from '../../public/event-data.json';
+import ChartComponent from '../components/ChartComponent';
+import HeatMap from '../components/HeatMap';
 
 const recEvents = [
 		{ src: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
@@ -63,7 +66,9 @@ const content = [
 	<main>
 		<CardGroup content={content} />
 		<VideoPlayer playlist={recEvents}/>
-		<ColumnChart />
+		<ChartComponent client:only="react"/>
+		<HeatMap client:only="react"/>
+		<!-- <AllEvents client:only="react"/> -->
 		<h2 class="text-center">Related Articles</h2>
 		<ul role="list" class="link-card-grid">
 			<Card

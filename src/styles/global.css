@@ -387,3 +387,34 @@ video {
     }
   } */
 }
+
+
+.color-empty {
+  fill: #434343;
+}
+
+.color-scale-0 {
+  fill: #434343;
+}
+
+.color-scale-1 {
+  fill: #f89393;
+}
+
+.color-scale-2 {
+  fill: #fc6c6c;
+}
+
+.color-scale-5 {
+  fill: #fe4646;
+}
+
+.color-scale-10 {
+  fill: #f62828;
+}
+.color-scale-15 {
+  fill: #fe1616;
+}
+.color-scale-20 {
+  fill: #ff0000;
+}

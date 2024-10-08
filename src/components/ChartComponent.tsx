@@ -29,7 +29,7 @@ function ChartComponent() {
           },
           tooltip: {
             custom: function({series, seriesIndex, dataPointIndex, w}:{[key:string]:any}) {
-							var label = w.globals.labels[dataPointIndex];
+              var label = w.globals.labels[dataPointIndex];
               var value = series[seriesIndex][dataPointIndex];
               return (
                 `<div class="arrow_box"><span class="tooltip-title">Time: ${label}</span>
@@ -97,9 +97,9 @@ function ChartComponent() {
     <div>
       {chartData && chartData?.series &&(
         <ReactApexChart
-            options={chartData.options}
-            series={chartData.series}
-            type="bar" />
+          options={chartData.options}
+          series={chartData.series}
+          type="bar" />
       )}
     </div>
   );

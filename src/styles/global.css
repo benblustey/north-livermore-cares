@@ -391,6 +391,10 @@ video {
 }
 
 #monthly-heatmap .react-calendar-heatmap {
+	rect:focus {
+		outline: #000 auto 1px;
+		outline-offset: -1px;
+	}
 	.color-empty {
 		fill: #434343;
 	}

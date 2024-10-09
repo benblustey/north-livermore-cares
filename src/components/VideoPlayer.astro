@@ -1,6 +1,5 @@
 ---
 import VideoPlaylist from './VideoPlaylist.astro';
-import TableList from './TableList.astro';
 
 interface VideoItem {
   title: string,
@@ -25,24 +24,23 @@ const { playlist } = Astro.props;
     controls>
     Your browser does not support the video tag.
   </video>
-  <VideoPlaylist content={playlist} />
-  <TableList />
+  <!-- <VideoPlaylist content={playlist} /> -->
 </div>
 
 <script>
 // Array of video sources
 const videoPlayer = document.getElementById('video-player') as HTMLMediaElement;
-const playlistElement = document.getElementById('playlist') as HTMLElement;
-const videoCards = playlistElement.getElementsByClassName('video-card');
 let currentVideoIndex = 0;
+const playlistElement = document.getElementById('playlist') as HTMLElement;
 
 // Initialize the playlist UI
 function initPlaylist() {
+	const videoCards = playlistElement.getElementsByClassName('video-card');
   for (let videoCard of videoCards) {
     let videoSrc = videoCard.getAttribute('data-video-src');
     videoCard.addEventListener('click', () => {
       loadVideo(videoSrc as string);
-      highlightActiveVideo();
+      highlightActiveVideo(playlistElement);
       videoPlayer.play();
     });
   }
@@ -54,7 +52,7 @@ function loadVideo(videoSrc: string) {
 }
 
 // // Highlight the active video in the playlist
-function highlightActiveVideo() {
+function highlightActiveVideo(playlistElement: HTMLElement) {
   const items = playlistElement.querySelectorAll('li');
   items.forEach(item => item.classList.remove('active'));
   items[currentVideoIndex].classList.add('active');
@@ -69,5 +67,5 @@ function highlightActiveVideo() {
 // });
 
 // Initialize the playlist
-initPlaylist();
+if (playlistElement) initPlaylist();
 </script>

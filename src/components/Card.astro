@@ -9,10 +9,10 @@ const { href, title, body } = Astro.props;
 
 <li class="link-card">
 	<a href={href} target="_blank">
-		<h2>
+		<h3>
 			{title}
 			<span>&rarr;</span>
-		</h2>
+		</h3>
 		<p>
 			{body}
 		</p>
@@ -41,9 +41,10 @@ const { href, title, body } = Astro.props;
 		background-color: #23262d;
 		opacity: 0.8;
 	}
-	h2 {
+	h3 {
 		margin: 0;
 		font-size: 1.25rem;
+		color: rgb(var(--accent));
 		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 	p {

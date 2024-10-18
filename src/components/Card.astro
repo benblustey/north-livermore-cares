@@ -8,7 +8,7 @@ const { href, title, body } = Astro.props;
 ---
 
 <li class="link-card">
-	<a href={href} target="_blank">
+	<a href={href} target="_blank" data-umami-event-article={title}>
 		<h3>
 			{title}
 			<span>&rarr;</span>

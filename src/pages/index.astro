@@ -2,33 +2,21 @@
 import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import VideoPlayer from '../components/VideoPlayer.astro';
-import ColumnChart from '../components/GraphsCharts.astro';
 import CardGroup from '../components/CardGroup.astro';
+import ChartComponent from '../components/ChartComponent';
+import HeatMap from '../components/HeatMap';
 
-import { eventTotals } from '../../public/event-data.json';
-
-const recEvents = [
-		{ src: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' },
-    { src: 'http://vjs.zencdn.net/v/oceans.mp4', title: 'Sep 4', length: '00:35', thumbnail: 'src/images/2024-06-25.png' }
-];
-
-const population = eventTotals.population;
+const population = 5650;
 const vetrans = Math.round(population * 0.046);
-const daysTotal = eventTotals.daysTotal;
-const eventsTotal = eventTotals.eventsTotal;
+
+const response = await fetch('http://localhost:4321/api/getEventData.json');
+const eventsData = await response.json();
+
+const daysTotal = eventsData.monthlyData.length;
+const eventsTotal = eventsData.eventsTotal;
+
 const content = [
-	{
+  {
     data: `~${population}`,
     title: "Neighbors",
     desc: "This data only reflects only the Old Town neighborhood and not the entire city of Livermore.* If data was aquired city wide, the number of affected residence would be much higher.",
@@ -42,60 +30,64 @@ const content = [
   },
   {
     data: `${daysTotal}`,
-		title: "Days of Fireworks",
+    title: "Days of Fireworks",
     desc: `There have been a total of ${daysTotal} days since June 25, 2024 with fireworks detnated. AI sound analysation was set for Explosions, due to the mortars not triggering fireworkd sound models.`
   },
   {
     data: `${eventsTotal}`,
     title: "Total Events",
-    desc: "Events are recordings of fireworks detected, not individual fireworks. Meaning, there are much more being detnated."
+    desc: "Events are recordings of fireworks detected, not individual fireworks. Meaning, there are much more being detonated."
   }
 ]
-
 ---
 
-<Layout title="North Livermore Cares">
-	<h1>Livermore <span class="text-gradient">Fireworks</span></h1>
-	<div class="intro-text">
-		<p>The Old Town neighborhood has taken advantage of the lack of basic enforcement and proper punishments for misdemeanors and felonies.</p>
-		<p>Unregulated parties and loud music sets the precident of lawless behavior without any concern or compassion for their fellow neighbors.</p>
-	</div>
-	<main>
-		<CardGroup content={content} />
-		<VideoPlayer playlist={recEvents}/>
-		<ColumnChart />
-		<h2 class="text-center">Related Articles</h2>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://fox40.com/news/local-news/more-citations-coming-in-northern-california-after-drone-reveals-illegal-fireworks-use/amp/"
-				title="Increased Fines Combat Fireworks"
-				body="Learn how Sacramento Fire Department is using undercover officials working to secretly capture video and cite people for setting off illegal fireworks."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Success with Tracy Ca"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://fox40.com/news/local-news/more-citations-coming-in-northern-california-after-drone-reveals-illegal-fireworks-use/amp/"
-				title="Increased Fines Combat Fireworks"
-				body="Learn how Sacramento Fire Department is using undercover officials working to secretly capture video and cite people for setting off illegal fireworks."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Success with Tracy Ca"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Success with Tracy Ca"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-		</ul>
+<Layout title="Livermore Fireworks" description="Livermore City needs help bringing an end to the year round fireworks detonating over the community.">
+  <h1>Livermore <span class="text-gradient">Fireworks</span></h1>
+  <div class="intro-text">
+    <p>The Old Town neighborhood has taken advantage of the lack of basic enforcement and proper punishments for misdemeanors and felonies.</p>
+    <p>Unregulated parties and loud music sets the precident of lawless behavior without any concern or compassion for their fellow neighbors.</p>
+  </div>
+  <main>
+    <CardGroup content={content} />
+    <ChartComponent client:only="react"/>
+    <HeatMap client:only="react"/>
+    <h2 class="text-center">Related Articles</h2>
+    <ul role="list" class="link-card-grid">
+      <Card
+        href="https://fox40.com/news/local-news/more-citations-coming-in-northern-california-after-drone-reveals-illegal-fireworks-use/amp/"
+        title="Increased Fines Combat Fireworks"
+        body="Learn how Sacramento Fire Department is using undercover officials working to secretly capture video and cite people for setting off illegal fireworks."
+      />
+      <Card
+        href="https://www.ttownmedia.com/tracy_press/fees-increased-for-use-of-illegal-fireworks/article_a9e93e62-dfcf-11ed-ba71-6b8f8cb4cbf7.html"
+        title="Success with Tracy Ca"
+        body="Sacramento increases fine to minimum of $750, issues 43 administrative citations, and arrests 14 for the health and safety code violations in regard to fireworks."
+      />
+      <Card
+        href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10588998/"
+        title="Fireworks, Veterans, and PTSD: The Ironies of the Fourth of July"
+        body="Learn more about the pychological affects that fireworks have on those that served our country."
+      />
+      <Card
+        href="https://medicalxpress.com/news/2023-11-person-dementia-fireworks-night.html"
+        title="How to support a person with dementia during fireworks night"
+        body="For a person with dementia, loud noises can confuse, scare or trigger unwanted past memories."
+      />
+      <Card
+        href="https://www.kcra.com/article/elk-grove-100k-fine-4th-of-july-illegal-fireworks/62012193"
+        title="Elk Grove issues $100k fine, others as part of 4th of July illegal fireworks enforcement"
+        body="In total, 19 property owners received citations and fines, Mendez said Thursday. The fines totaled $240,000."
+      />
+      <Card
+        href="https://www.va.gov/hines-health-care/stories/how-your-fireworks-may-affect-americas-veterans/"
+        title="How your fireworks may affect America’s Veterans"
+        body="What some don’t realize is that these colorful celebrations of American freedom can seriously impact the Veterans who defended it."
+      />
+  </ul>
 
-	</main>
-	<footer>
-		<p>Footer</p>
-	</footer>
+  </main>
+  <footer>
+    <p>Made by people who care.</p>
+  </footer>
 </Layout>
 

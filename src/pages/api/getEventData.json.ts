@@ -3,25 +3,20 @@ import type EventData from '../../types/event.type';
 
 interface MonthlyData {
   date: string,
+  formattedDate: string,
   count: number,
   events: string[]
 }
 
-export const GET: APIRoute = async (context) => {
-
+export const GET: APIRoute = async () => {
+  
   const res = await fetch("http://localhost:4321/api/events/");
   const dataEvents = await res.json();
 
-  // Grab all the hours when events occured
-  // This data is used for the bargraph
+  // Init array for events by hour of the day
   const hoursInDay = Array(24).fill(0);
-	const monthlyData: MonthlyData[] = [];
-
-  // create object array for monthly data
-  // const monthArray = Array.from({ length: 12 }, () => ({
-  //   eventTotal: 0,
-  //   events: [] as string[],
-  // }));
+  const monthlyData: MonthlyData[] = [];
+  let eventsTotal: number = 0;
 
   function search(dateKey: string, monthArray:MonthlyData[]){
     for (let i=0; i < monthArray.length; i++) {
@@ -31,50 +26,47 @@ export const GET: APIRoute = async (context) => {
     }
   }
 
-  const array = [
-      { name:"string 1", value:"this", other: "that" },
-      { name:"string 2", value:"this", other: "that" }
-  ];
-
-  // const resultObject = search("string 1", array);
-  // console.log(resultObject)
-
-
   dataEvents.forEach((event: EventData) => {
     const month = event.friendlyDate.slice(3, 5);
-    const date = event.friendlyDate.slice(0,8);
-		const time = event.friendlyDate.slice(10,18)
+    const date = event.friendlyDate.slice(0, 8);
+    const time = event.friendlyDate.slice(10,18)
     const hour = event.friendlyDate.slice(10, 12);
+
+    eventsTotal+=1;
+    // events by hour of the day obj
     if (month && month[0]) {
       let returnedIndex = parseInt(hour);
       hoursInDay[returnedIndex] = (hoursInDay[returnedIndex] || 0) + 1;
-  
-      // const monthIndex = parseInt(month) - 1; // Adjust index for 0-based array
-      // let monthltTotal = (monthArray[monthIndex].eventTotal || 0);
-  
-      // monthArray[monthIndex].eventTotal = monthltTotal + 1;
-      // // Convert to primitive string to avoid the error
-      // monthArray[monthIndex].events.push(event.friendlyDate.toString());
     }
 
     const fullDate: string = `20${date}`;
     const resultDay = search(fullDate, monthlyData);
-		const formattedTime = time.replace(/-/g, ':');
+    const formattedTime = time.replace(/-/g, ':');
+    
+    const dateObj = new Date(fullDate);
+    // Use toLocaleString with options for weekday, month, and day
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'short',
+      month: 'short',
+      day: '2-digit'
+    };
+    const formattedDate = dateObj.toLocaleString('en-US', options);
 
     if (resultDay) {
       resultDay.count += 1;
       resultDay.events.push(time)
     } else {
-			let newDayData : MonthlyData = {
-				date: fullDate,
-				count: 1,
-				events: [formattedTime]
-			}
-			monthlyData.push(newDayData)
-		}
+      let newDayData : MonthlyData = {
+        date: fullDate,
+        formattedDate: formattedDate,
+        count: 1,
+        events: [formattedTime]
+      }
+      monthlyData.push(newDayData)
+    }
   });
 
-  const cleanEvent = {monthlyData,hoursInDay}
+  const cleanEvent = {monthlyData,hoursInDay,eventsTotal}
 
   return new Response(JSON.stringify(cleanEvent));
 };

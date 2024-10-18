@@ -1,8 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
+interface ChartData {
+	options: {};
+	series?: [
+		{
+			name:string;
+			data:string[]
+		}
+	];
+}
+
 function ChartComponent() {
-  const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState<ChartData>({
+		options: {}
+	});
 
   useEffect(() => {
     fetch("/api/getEventData.json")
@@ -81,12 +93,12 @@ function ChartComponent() {
             },
           },
         },
-        series: [
-          {
-            name: 'Hourly',
-            data: hourlyData
-          }
-        ]
+				series: [
+					{
+						name: 'Hourly',
+						data: hourlyData
+					}
+				]
       })
       
   })
@@ -95,11 +107,11 @@ function ChartComponent() {
 
   return (
     <div>
-      {chartData && chartData?.series &&(
+      {chartData && chartData.series &&(
         <ReactApexChart
-          options={chartData.options}
-          series={chartData.series}
-          type="bar" />
+					options={chartData.options}
+					series={chartData.series as any[]}
+					type="bar" />
       )}
     </div>
   );

@@ -1,33 +1,27 @@
 ---
 interface Props {
-	title: string;
+  title: string;
+  description: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<!-- <meta charset="UTF-8" /> -->
-		<!-- <meta name="description" content="Astro description" /> -->
-		<!-- <meta name="viewport" content="width=device-width" /> -->
-		<!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
-		<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
-		<!-- <meta name="generator" content={Astro.generator} /> -->
-		<!-- <title>{title}</title> -->
-		
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{title}</title>
-		<meta name="description" content=">{title}">
-		<meta property="og:title" content=">{title}">
-		<meta property="og:type" content="website">
-		<meta property="og:url" content="https://www.north-livermore-cares.com">
-		<meta property="og:image" content="https://www.north-livermore-cares.com/assets/imgs/nlc-share.jpg">
-	
-	</head>
-	<body>
-		<slot />
-	</body>	
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <meta property="og:title" content={title}>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.livermore-fireworks.com">
+    <meta property="og:image" content="https://www.livermore-fireworks.com/livermore-needs-help.jpg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <!-- <script defer src="https://www.livermore-fireworks.com/umami.js" data-website-id="c030c906-ce3b-4b64-986c-38c85d3abc02"></script> -->
+  </head>
+  <body>
+    <slot />
+  </body>	
 </html>

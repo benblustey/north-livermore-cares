@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import type EventData from '../../types/event.type';
 
-export const GET: APIRoute = async (context) => {
+export const GET: APIRoute = async () => {
 
 	const res = await fetch("http://localhost:4321/api/events/");
   const dataEvents = await res.json();

@@ -4,7 +4,9 @@
   --accent-light: 134, 142, 150; /*LIGHT-GREY*/
   --accent-dark: 128, 128, 128; /*GREY*/
   --accent-very-dark: 35, 38, 45; /*VERY DARK #23262d*/
+  --accent-important: 255, 107, 107;
   --accent-black: 0, 0, 0; /*BLACK*/
+  --accent-white: 255,255,255;
   --container-size: 960px;
   --accent-gradient: linear-gradient(
     45deg,
@@ -197,7 +199,7 @@ p {
     }
     .card-title {
       font-size: clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.5063)), 1.4rem);
-      border-bottom: 1px solid #FFF;
+      border-bottom: 1px solid rgb(var(--accent-white));
       margin-bottom: 8px;
       @media screen and (max-width: 768px) {
         display: inline;
@@ -212,26 +214,26 @@ p {
   margin-bottom: var(--container-margin-lg);
 }
 .apexcharts-tooltip {
-  background-color: #000000 !important;
-  color: #ff6b6b !important;
+  background-color: rgb(var(--accent-black)) !important;
+  color: rgb(255, 107, 107) !important;
   padding: 8px;
   .tooltip-title,
   .apexcharts-text.apexcharts-yaxis-label,
   .apexcharts-text.apexcharts-xaxis-label,
   .apexcharts-legend-series .apexcharts-legend-text {
-    color: #FFFFFF !important;
+    color: rgb(var(--accent-white)) !important;
   }  
 }
 .apexcharts-tooltip-title,
 #chartContainer .apexcharts-tooltip {
-  color: #000000 !important;
+  color: rgb(var(--accent-black)) !important;
 }
 
 /* VIDEO PLAYER */
 .play-btn {
   border: none;
   border-radius: 8px;
-  color: #FFF;
+  color: rgb(var(--accent-white)) !important;
   padding: 4px 8px;
   background-color: rgb(var(--accent));
 }
@@ -277,7 +279,7 @@ video {
   }
 }
 .data-table div.datatable-wrapper {
-	overflow-y: scroll;
+  overflow-y: scroll;
   div.datatable-top {
     div.datatable-dropdown label {
       font-size: 16px;
@@ -305,7 +307,7 @@ video {
       }
     }
     .datatable-pagination .datatable-active button {
-      background-color: #ff6b6b !important;
+      background-color: rgb(var(--accent-important)) !important;
 
     }
   }
@@ -316,8 +318,8 @@ video {
     vertical-align: middle;
   }
   .datatable-sorter::after {
-    border-bottom: #ff6b6b !important;
-    border-top: #ff6b6b !important;
+    border-bottom: rgb(var(--accent-important)) !important;
+    border-top: rgb(var(--accent-important)) !important;
   }
   .search-box {
     label {
@@ -388,33 +390,61 @@ video {
   } */
 }
 
-
-.color-empty {
-  fill: #434343;
+#monthly-heatmap .react-calendar-heatmap {
+  rect:focus {
+    outline: #000 auto 1px;
+    outline-offset: -1px;
+  }
+  .color-empty {
+    fill: #434343;
+  }
+  .color-scale-0 {
+    fill: #434343;
+  }
+  .color-scale-1 {
+    fill: #f89393;
+  }
+  .color-scale-2 {
+    fill: #fc6c6c;
+  }
+  .color-scale-3 {
+    fill: #fc6c6c;
+  }
+  .color-scale-4 {
+    fill: #fc6c6c;
+  }
+  .color-scale-5 {
+    fill: #fe4646;
+  }
+  .color-scale-10 {
+    fill: #f62828;
+  }
+  .color-scale-15 {
+    fill: #fe1616;
+  }
+  .color-scale-20 {
+    fill: #ff0000;
+  }
+  .color-scale-25 {
+    fill: #ff0000;
+  }
+  text {
+    font-size: 4px !important;
+  }
 }
-
-.color-scale-0 {
-  fill: #434343;
-}
-
-.color-scale-1 {
-  fill: #f89393;
-}
-
-.color-scale-2 {
-  fill: #fc6c6c;
-}
-
-.color-scale-5 {
-  fill: #fe4646;
-}
-
-.color-scale-10 {
-  fill: #f62828;
-}
-.color-scale-15 {
-  fill: #fe1616;
-}
-.color-scale-20 {
-  fill: #ff0000;
+.heatmap-tool-tip.__react_component_tooltip {
+  background-color: rgb(var(--accent-black));
+  opacity: 1;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 2px solid rgb(var(--accent-white));
+  padding: 8px;
+  color: rgb(var(--accent-important));
+  .tooltip-title {
+    color: rgb(var(--accent-white));
+    display: block;
+  }
+  ::before {
+    display: none !important;
+  }
 }
